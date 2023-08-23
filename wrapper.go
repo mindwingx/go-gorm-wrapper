@@ -132,6 +132,28 @@ func (g *sql) Migrate(path string) {
 	}
 }
 
+func (g *sql) Seed() {
+	/*var count int64
+	result := g.db.Model(&domain.User{}).Count(&count)
+
+	if result.Error != nil {
+		helper.CustomPanic(g.locale.Get("sql_seed_inquire_err"), result.Error)
+	}
+
+	if count == 0 {
+		color.Yellow(g.locale.Get("sql_seed_start"))
+
+		for _, user := range g.mockedPayload() {
+			res := g.db.Create(&user)
+			if res.Error != nil {
+				helper.CustomPanic(g.locale.Get("sql_seed_fail"), res.Error)
+			}
+		}
+
+		color.Yellow(g.locale.Get("sql_seed_finished"))
+	}*/
+}
+
 // Queries
 
 func (g *sql) Close() {
@@ -386,28 +408,6 @@ func (g *sql) parseSqlFile(path string, fileInfo os.FileInfo) string {
 	// Convert SQL file contents to string
 	q := string(sqlBytes)
 	return q
-}
-
-func (g *sql) Seed() {
-	/*var count int64
-	result := g.db.Model(&domain.User{}).Count(&count)
-
-	if result.Error != nil {
-		helper.CustomPanic(g.locale.Get("sql_seed_inquire_err"), result.Error)
-	}
-
-	if count == 0 {
-		color.Yellow(g.locale.Get("sql_seed_start"))
-
-		for _, user := range g.mockedPayload() {
-			res := g.db.Create(&user)
-			if res.Error != nil {
-				helper.CustomPanic(g.locale.Get("sql_seed_fail"), res.Error)
-			}
-		}
-
-		color.Yellow(g.locale.Get("sql_seed_finished"))
-	}*/
 }
 
 /*func (g *sql) mockedPayload() []domain.User {
