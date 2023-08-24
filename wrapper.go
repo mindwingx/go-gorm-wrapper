@@ -97,10 +97,8 @@ func (g *sql) InitSql() {
 	g.db = database
 }
 
-// Migrate migration files base path
+// Migrate path: migration files base path
 func (g *sql) Migrate(path string) {
-	//path := fmt.Sprintf("%s/database/postgres", src.RootPath())
-
 	// Open the directory
 	dir, err := os.Open(path)
 	if err != nil {
@@ -132,26 +130,32 @@ func (g *sql) Migrate(path string) {
 	}
 }
 
-func (g *sql) Seed() {
-	/*var count int64
-	result := g.db.Model(&domain.User{}).Count(&count)
+func (g *sql) Seed(items []abstraction.SeederItem) {
+	if len(items) > 0 {
+		var count int64
 
-	if result.Error != nil {
-		helper.CustomPanic(g.locale.Get("sql_seed_inquire_err"), result.Error)
-	}
+		for _, item := range items {
+			instance := g.db.Model(&item.Dependency)
+			result := instance.Count(&count)
 
-	if count == 0 {
-		color.Yellow(g.locale.Get("sql_seed_start"))
+			if result.Error != nil {
+				helper.CustomPanic(g.locale.Get("sql_seed_inquire_err"), result.Error)
+			}
 
-		for _, user := range g.mockedPayload() {
-			res := g.db.Create(&user)
-			if res.Error != nil {
-				helper.CustomPanic(g.locale.Get("sql_seed_fail"), res.Error)
+			if (count == 0) && (len(item.Data) > 0) {
+				color.Yellow(g.locale.Get("sql_seed_start"))
+
+				for _, data := range item.Data {
+					create := instance.Create(data)
+					if create.Error != nil {
+						helper.CustomPanic(g.locale.Get("sql_seed_fail"), create.Error)
+					}
+				}
+
+				color.Yellow(g.locale.Get("sql_seed_finished"))
 			}
 		}
-
-		color.Yellow(g.locale.Get("sql_seed_finished"))
-	}*/
+	}
 }
 
 // Queries
@@ -409,40 +413,3 @@ func (g *sql) parseSqlFile(path string, fileInfo os.FileInfo) string {
 	q := string(sqlBytes)
 	return q
 }
-
-/*func (g *sql) mockedPayload() []domain.User {
-	var mockedUsers []domain.User
-
-	mockedUsers = append(
-		mockedUsers,
-		domain.User{
-			Username:  "jimmy",
-			FirstName: "Jim",
-			LastName:  "Karry",
-			Phone:     "989352231232",
-			Email:     "jimmy@mejib.io",
-			Password:  "password",
-			Active:    true,
-		},
-		domain.User{
-			Username:  "katty",
-			FirstName: "Katty",
-			LastName:  "Harold",
-			Phone:     "989125693625",
-			Email:     "katty@mejib.io",
-			Password:  "password",
-			Active:    true,
-		},
-		domain.User{
-			Username:  "moer",
-			FirstName: "Moer",
-			LastName:  "Pure",
-			Phone:     "989113695899",
-			Email:     "moer@mejib.io",
-			Password:  "password",
-			Active:    true,
-		},
-	)
-
-	return mockedUsers
-}*/

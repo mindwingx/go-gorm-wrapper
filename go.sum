@@ -21,6 +21,8 @@ github.com/mindwingx/abstraction v0.0.0-20230823142114-812744332e9f h1:EX9YDBxem
 github.com/mindwingx/abstraction v0.0.0-20230823142114-812744332e9f/go.mod h1:3apSfvhyAhti/txiNt3NnGa/twNjVqIeyGNvGOriThw=
 github.com/mindwingx/abstraction v0.0.0-20230823151916-35aabe494ac2 h1:E6NZrvDtzusbUvdaZMaqgZ/UPzaHdEci3LhaKJiVU5M=
 github.com/mindwingx/abstraction v0.0.0-20230823151916-35aabe494ac2/go.mod h1:3apSfvhyAhti/txiNt3NnGa/twNjVqIeyGNvGOriThw=
+github.com/mindwingx/abstraction v0.0.0-20230824123106-4cee8ff4b315 h1:zSc3fRJj/vCGscKGWUiwB0IIZ3rtCml9rN1FQmwLybs=
+github.com/mindwingx/abstraction v0.0.0-20230824123106-4cee8ff4b315/go.mod h1:3apSfvhyAhti/txiNt3NnGa/twNjVqIeyGNvGOriThw=
 github.com/mindwingx/go-helper v0.0.0-20230823115142-6448921aaddd h1:hbV5MrQGvDE+iPRv9xprju3OuAPsb5Qr6lS4Mb1xqc8=
 github.com/mindwingx/go-helper v0.0.0-20230823115142-6448921aaddd/go.mod h1:UAJywWDOBKwt+rI6EPiVmEDCJARPNePIsGu43vyLzcA=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
