@@ -4,7 +4,7 @@ go 1.19
 
 require (
 	github.com/fatih/color v1.15.0
-	github.com/mindwingx/abstraction v0.0.0-20230823151916-35aabe494ac2
+	github.com/mindwingx/abstraction v0.0.0-20230824123106-4cee8ff4b315
 	github.com/mindwingx/go-helper v0.0.0-20230823115142-6448921aaddd
 	gorm.io/driver/postgres v1.5.2
 	gorm.io/gorm v1.25.4
