@@ -172,89 +172,108 @@ func (g *sql) Close() {
 	}
 }
 
-func (g *sql) Where(query interface{}, args ...interface{}) abstraction.Query {
-	return g.db.Where(query, args...)
+func (g *sql) Where(query interface{}, args ...interface{}) abstraction.Sql {
+	g.db = g.db.Where(query, args...)
+	return g
 }
 
-func (g *sql) Or(query interface{}, args ...interface{}) abstraction.Query {
-	return g.db.Or(query, args...)
+func (g *sql) Or(query interface{}, args ...interface{}) abstraction.Sql {
+	g.db = g.db.Or(query, args...)
+	return g
 }
 
-func (g *sql) Not(query interface{}, args ...interface{}) abstraction.Query {
-	return g.db.Not(query, args...)
+func (g *sql) Not(query interface{}, args ...interface{}) abstraction.Sql {
+	g.db = g.db.Not(query, args...)
+	return g
 }
 
-func (g *sql) Limit(value int) abstraction.Query {
-	return g.db.Limit(value)
+func (g *sql) Limit(value int) abstraction.Sql {
+	g.db = g.db.Limit(value)
+	return g
 }
 
-func (g *sql) Offset(value int) abstraction.Query {
-	return g.db.Offset(value)
+func (g *sql) Offset(value int) abstraction.Sql {
+	g.db = g.db.Offset(value)
+	return g
 }
 
-func (g *sql) Order(value string) abstraction.Query {
-	return g.db.Order(value)
+func (g *sql) Order(value string) abstraction.Sql {
+	g.db = g.db.Order(value)
+	return g
 }
 
-func (g *sql) Select(query interface{}, args ...interface{}) abstraction.Query {
-	return g.db.Select(query, args...)
+func (g *sql) Select(query interface{}, args ...interface{}) abstraction.Sql {
+	g.db = g.db.Select(query, args...)
+	return g
 }
 
-func (g *sql) Omit(columns ...string) abstraction.Query {
-	return g.db.Omit(columns...)
+func (g *sql) Omit(columns ...string) abstraction.Sql {
+	g.db = g.db.Omit(columns...)
+	return g
 }
 
-func (g *sql) Group(query string) abstraction.Query {
-	return g.db.Group(query)
+func (g *sql) Group(query string) abstraction.Sql {
+	g.db = g.db.Group(query)
+	return g
 }
 
-func (g *sql) Having(query string, values ...interface{}) abstraction.Query {
-	return g.db.Having(query, values...)
+func (g *sql) Having(query string, values ...interface{}) abstraction.Sql {
+	g.db = g.db.Having(query, values...)
+	return g
 }
 
-func (g *sql) Joins(query string, args ...interface{}) abstraction.Query {
-	return g.db.Joins(query, args...)
+func (g *sql) Joins(query string, args ...interface{}) abstraction.Sql {
+	g.db = g.db.Joins(query, args...)
+	return g
 }
 
-func (g *sql) Scopes(funcs ...func(abstraction.Query) abstraction.Query) abstraction.Query {
+func (g *sql) Scopes(funcs ...func(abstraction.Query) abstraction.Sql) abstraction.Sql {
 	var scopes []func(*gorm.DB) *gorm.DB
 
-	for _, f := range funcs {
+	/*for _, f := range funcs {
 		// Dereference the pointer to *gorm.DB and convert it to *gorm.DB
 		scopes = append(scopes, func(db *gorm.DB) *gorm.DB {
 			return f(db) // in fact: f(abstraction.Query(db))
 		})
-	}
+	}*/
 
-	return g.db.Scopes(scopes...)
+	g.db = g.db.Scopes(scopes...)
+	return g
 }
 
-func (g *sql) Unscoped() abstraction.Query {
-	return g.db.Unscoped()
+func (g *sql) Unscoped() abstraction.Sql {
+	g.db = g.db.Unscoped()
+	return g
 }
 
-func (g *sql) Attrs(attrs ...interface{}) abstraction.Query {
-	return g.db.Attrs(attrs...)
+func (g *sql) Attrs(attrs ...interface{}) abstraction.Sql {
+	g.db = g.db.Attrs(attrs...)
+	return g
 }
 
-func (g *sql) Assign(attrs ...interface{}) abstraction.Query {
-	return g.db.Assign(attrs...)
+func (g *sql) Assign(attrs ...interface{}) abstraction.Sql {
+	g.db = g.db.Assign(attrs...)
+	return g
 }
 
-func (g *sql) First(out interface{}, where ...interface{}) abstraction.Query {
-	return g.db.First(out, where...)
+func (g *sql) First(out interface{}, where ...interface{}) abstraction.Sql {
+	g.db = g.db.First(out, where...)
+	return g
 }
 
-func (g *sql) Last(out interface{}, where ...interface{}) abstraction.Query {
-	return g.db.Last(out, where...)
+func (g *sql) Last(out interface{}, where ...interface{}) abstraction.Sql {
+	g.db = g.db.Last(out, where...)
+	return g
 }
 
-func (g *sql) Find(out interface{}, where ...interface{}) abstraction.Query {
-	return g.db.Find(out, where...)
+func (g *sql) Find(out interface{}, where ...interface{}) abstraction.Sql {
+	g.db = g.db.Find(out, where...)
+	return g
 }
 
-func (g *sql) Scan(dest interface{}) abstraction.Query {
-	return g.db.Scan(dest)
+func (g *sql) Scan(dest interface{}) abstraction.Sql {
+	g.db = g.db.Scan(dest)
+	return g
 }
 
 func (g *sql) Row() *SdkSql.Row {
@@ -269,80 +288,99 @@ func (g *sql) ScanRows(rows *SdkSql.Rows, result interface{}) error {
 	return g.db.ScanRows(rows, result)
 }
 
-func (g *sql) Pluck(column string, value interface{}) abstraction.Query {
-	return g.db.Pluck(column, value)
+func (g *sql) Pluck(column string, value interface{}) abstraction.Sql {
+	g.db = g.db.Pluck(column, value)
+	return g
 }
 
-func (g *sql) Count(value *int64) abstraction.Query {
-	return g.db.Count(value)
+func (g *sql) Count(value *int64) abstraction.Sql {
+	g.db = g.db.Count(value)
+	return g
 }
 
-func (g *sql) FirstOrInit(out interface{}, where ...interface{}) abstraction.Query {
-	return g.db.FirstOrInit(out, where...)
+func (g *sql) FirstOrInit(out interface{}, where ...interface{}) abstraction.Sql {
+	g.db = g.db.FirstOrInit(out, where...)
+	return g
 }
 
-func (g *sql) FirstOrCreate(out interface{}, where ...interface{}) abstraction.Query {
-	return g.db.FirstOrCreate(out, where...)
+func (g *sql) FirstOrCreate(out interface{}, where ...interface{}) abstraction.Sql {
+	g.db = g.db.FirstOrCreate(out, where...)
+	return g
 }
 
-func (g *sql) Update(column string, attrs ...interface{}) abstraction.Query {
-	return g.db.Update(column, attrs)
+func (g *sql) Update(column string, attrs ...interface{}) abstraction.Sql {
+	g.db = g.db.Update(column, attrs)
+	return g
 }
 
-func (g *sql) Updates(values interface{}) abstraction.Query {
-	return g.db.Updates(values)
+func (g *sql) Updates(values interface{}) abstraction.Sql {
+	g.db = g.db.Updates(values)
+	return g
 }
 
-func (g *sql) UpdateColumn(column string, attrs ...interface{}) abstraction.Query {
-	return g.db.UpdateColumn(column, attrs)
+func (g *sql) UpdateColumn(column string, attrs ...interface{}) abstraction.Sql {
+	g.db = g.db.UpdateColumn(column, attrs)
+	return g
 }
 
-func (g *sql) UpdateColumns(values interface{}) abstraction.Query {
-	return g.db.UpdateColumns(values)
+func (g *sql) UpdateColumns(values interface{}) abstraction.Sql {
+	g.db = g.db.UpdateColumns(values)
+	return g
 }
 
-func (g *sql) Save(value interface{}) abstraction.Query {
-	return g.db.Save(value)
+func (g *sql) Save(value interface{}) abstraction.Sql {
+	g.db = g.db.Save(value)
+	return g
 }
 
-func (g *sql) Create(value interface{}) abstraction.Query {
-	return g.db.Create(value)
+func (g *sql) Create(value interface{}) abstraction.Sql {
+	g.db = g.db.Create(value)
+	return g
 }
 
-func (g *sql) Delete(value interface{}, where ...interface{}) abstraction.Query {
-	return g.db.Delete(value, where...)
+func (g *sql) Delete(value interface{}, where ...interface{}) abstraction.Sql {
+	g.db = g.db.Delete(value, where...)
+	return g
 }
 
-func (g *sql) Raw(sql string, values ...interface{}) abstraction.Query {
-	return g.db.Raw(sql, values...)
+func (g *sql) Raw(sql string, values ...interface{}) abstraction.Sql {
+	g.db = g.db.Raw(sql, values...)
+	return g
 }
 
-func (g *sql) Exec(sql string, values ...interface{}) abstraction.Query {
-	return g.db.Exec(sql, values...)
+func (g *sql) Exec(sql string, values ...interface{}) abstraction.Sql {
+	g.db = g.db.Exec(sql, values...)
+	return g
 }
 
-func (g *sql) Model(value interface{}) abstraction.Query {
-	return g.db.Model(value)
+func (g *sql) Model(value interface{}) abstraction.Sql {
+	g.db = g.db.Model(value)
+	return g
 }
 
-func (g *sql) Table(name string) abstraction.Query {
-	return g.db.Table(name)
+func (g *sql) Table(name string) abstraction.Sql {
+	g.db = g.db.Table(name)
+	return g
 }
 
-func (g *sql) Debug() abstraction.Query {
-	return g.db.Debug()
+func (g *sql) Debug() abstraction.Sql {
+	g.db = g.db.Debug()
+	return g
 }
 
-func (g *sql) Begin() abstraction.Query {
-	return g.db.Begin()
+func (g *sql) Begin() abstraction.Sql {
+	g.db = g.db.Begin()
+	return g
 }
 
-func (g *sql) Commit() abstraction.Query {
-	return g.db.Commit()
+func (g *sql) Commit() abstraction.Sql {
+	g.db = g.db.Commit()
+	return g
 }
 
-func (g *sql) Rollback() abstraction.Query {
-	return g.db.Rollback()
+func (g *sql) Rollback() abstraction.Sql {
+	g.db = g.db.Rollback()
+	return g
 }
 
 func (g *sql) AutoMigrate(values ...interface{}) error {
@@ -353,16 +391,19 @@ func (g *sql) Association(column string) *gorm.Association {
 	return g.db.Association(column)
 }
 
-func (g *sql) Preload(column string, conditions ...interface{}) abstraction.Query {
-	return g.db.Preload(column, conditions...)
+func (g *sql) Preload(column string, conditions ...interface{}) abstraction.Sql {
+	g.db = g.db.Preload(column, conditions...)
+	return g
 }
 
-func (g *sql) Set(name string, value interface{}) abstraction.Query {
-	return g.db.Set(name, value)
+func (g *sql) Set(name string, value interface{}) abstraction.Sql {
+	g.db = g.db.Set(name, value)
+	return g
 }
 
-func (g *sql) InstanceSet(name string, value interface{}) abstraction.Query {
-	return g.db.InstanceSet(name, value)
+func (g *sql) InstanceSet(name string, value interface{}) abstraction.Sql {
+	g.db = g.db.InstanceSet(name, value)
+	return g
 }
 
 func (g *sql) Get(name string) (interface{}, bool) {
